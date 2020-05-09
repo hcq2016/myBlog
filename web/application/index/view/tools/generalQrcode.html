@@ -1,0 +1,80 @@
+<include file="public:_header">
+
+
+  <div class="content whisper-content">
+    <div class="cont">
+               <div class="form-box">
+                <div class="form">
+             <!--      <form class="layui-form" action=""> -->
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">二维码内容</span>
+                                <input type="text" placeholder="" class="layui-input-block"  name="content" value="">
+                            </div>
+                        </div>
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">类型</span>
+						        <span class="layui-breadcrumb layui-input-block" lay-separator="|">
+						          <a href="javascript:void(0);" class="active">文本</a>
+						        </span>
+                            </div>
+                        </div>
+                         <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">码</span>
+                                <img src="" id="qrcode"  class="layui-input-block"  />
+                            </div>
+                        </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block" style="text-align: right;">
+                        <button class="layui-btn definite operation-button">生成</button>
+                      </div>
+                    </div>
+<!--                   </form> -->
+                </div>
+              </div>
+    </div>
+  </div>
+  
+<!--   底部 -->
+  <include file="public:_footer">
+
+  <script type="text/javascript" src="layui/layui.js"></script>
+  <script type="text/javascript">
+  layui.config({
+      base: 'js/util/'
+    }).use(['element','laypage','form','menu'],function(){
+      element = layui.element,laypage = layui.laypage,form = layui.form,menu = layui.menu;
+      laypage.render({
+        elem: 'demo'
+        ,count: 70 //数据总数，从服务端得到
+      });
+    })
+    
+    $(document).ready(function() {
+	    $('.operation-button').on('click',function(){
+	    	var params = {};
+	    	var content = $('input[name=content]').val();
+	    	if(content==''){
+	    		layer.msg('请输入内容');
+	    		return;
+	    	}
+	    	
+	    	params['content'] = content;
+	    	res = JSON.stringify(params);
+	        var form_data = new FormData();
+	        
+	        form_data.append("params", res);
+	    	Formsubmit.formsubmit(form_data,'/api/qrcode/index', 'submit_callback');
+	    });
+	    
+   });
+    
+    function submit_callback(data){
+    	$('#qrcode').attr('src', data.data);
+    }
+   
+  </script>
+</body>
+</html>

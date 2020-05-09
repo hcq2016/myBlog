@@ -1,0 +1,119 @@
+<include file="public:_header">
+
+  <div class="content whisper-content">
+    <div class="cont">
+               <div class="form-box">
+                <div class="form">
+                   <form class="layui-form"  action="" method="post"> 
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">hostname</span>
+                                <input type="text" placeholder="" class="layui-input-block tools-input"  name="hostname" value="">
+                            </div>
+                        </div>
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">port</span>
+                                <input type="text" placeholder="" class="layui-input-block tools-input"  name="port" value="3306">
+                            </div>
+                        </div>
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">username</span>
+                                <input type="text" placeholder="" class="layui-input-block tools-input"  name="username" value="">
+                            </div>
+                        </div>
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">password</span>
+                                <input type="password" placeholder="" class="layui-input-block tools-input"  name="password" value="">
+                            </div>
+                        </div>
+                        <div class="item-box">
+                            <div class="form-box">
+                                <span class="input-group-addon">database</span>
+                                <input type="text" placeholder="" class="layui-input-block tools-input"  name="database" value="">
+                            </div>
+                        </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block" style="text-align: right;">
+                        <button class="layui-btn table-list">download table list document</button>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block" style="text-align: right;">
+                        <button class="layui-btn table-columns ">download table columns document</button>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block" style="text-align: right;">
+                        <button class="layui-btn  table-example">download mysqldb description doc example</button>
+                      </div>
+                    </div>
+                   </form> 
+                </div>
+              </div>
+    </div>
+  </div>
+  
+<!--   底部 -->
+  <include file="public:_footer">
+
+  <script type="text/javascript" src="layui/layui.js"></script>
+  <script type="text/javascript">
+  layui.config({
+      base: 'js/util/'
+    }).use(['element','laypage','form','menu'],function(){
+      element = layui.element,laypage = layui.laypage,form = layui.form,menu = layui.menu;
+      laypage.render({
+        elem: 'demo'
+        ,count: 70 //数据总数，从服务端得到
+      });
+    })
+    
+    $('.table-list').on('click', function(){
+    	$("form").attr('method', 'post');
+    	$("form").attr('action', "{{$base_url}}/index.php/api/DocumentBuilder/tableList");
+   	
+    })
+    
+    $('.table-columns').on('click', function(){
+    	$("form").attr('method', 'post');
+    	$("form").attr('action', "{{$base_url}}/index.php/api/DocumentBuilder/tableColumns");
+   	
+    })
+    
+    $('.table-example').on('click', function(){
+    	$("form").attr('method', 'get');
+    	$("form").attr('action', "{{$base_url}}/../uploads/database-description-document.docx");
+   	
+    })
+    
+   $("form").submit(function(e){
+	   if($("form").attr('method')=='post'){
+		   	if($('input[name=hostname]').val()==''){
+				layer.msg('请输入hostname');
+				return false;
+			}
+		   	if($('input[name=port]').val()==''){
+				layer.msg('请输入port');
+				return false;
+			}
+		   	if($('input[name=username]').val()==''){
+				layer.msg('请输入username');
+				return false;
+			}
+		   	if($('input[name=password]').val()==''){
+				layer.msg('请输入password');
+				return false;
+			}
+		   	if($('input[name=database]').val()==''){
+				layer.msg('请输入database');
+				return false;
+			}
+   		}
+   });
+   
+  </script>
+</body>
+</html>

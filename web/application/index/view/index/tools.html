@@ -1,0 +1,72 @@
+<include file="public:_header">
+
+
+  <div class="content whisper-content">
+    <div class="cont">
+      <div class="whisper-list">
+        <div class="item-box">
+        	<a href="{{$base_url}}/index.php/index/tools/echats">
+	          <div class="item">
+	            <p class="text-cont">
+	              Echats生成图表
+	            </p>
+	          </div>
+          </a>
+        </div>
+        
+        
+        <div class="item-box">
+           	<a href="{{$base_url}}/index.php/index/tools/mysql_tables_list">
+	          <div class="item">
+	            <p class="text-cont">
+	              mysql 数据库结构设计文档生成器
+	            </p>
+	          </div>
+          </a>
+        </div>
+        
+        
+        <div class="item-box">
+          	<a href="{{$base_url}}/index.php/index/tools/general_qrcode">
+	          <div class="item">
+	            <p class="text-cont">
+	              生成二维码
+	            </p>
+	          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/html" id="laytplCont">
+    <div class="cont">
+      <div class="img">
+        <img src="{{d.avatar}}" alt="">
+      </div>
+      <div class="text">
+        <p class="tit"><span class="name">{{d.name}}</span><span class="data">2018/06/06</span></p>
+        <p class="ct">{{d.cont}}</p>
+      </div>
+    </div>
+  </script>
+  
+<!--   底部 -->
+  <include file="public:_footer">
+
+  <script type="text/javascript" src="layui/layui.js"></script>
+  <script type="text/javascript">
+   layui.config({
+      base: 'js/util/'
+    }).use(['element','laypage','form','menu'],function(){
+      element = layui.element,laypage = layui.laypage,form = layui.form,menu = layui.menu;
+      laypage.render({
+        elem: 'demo'
+        ,count: 70 //数据总数，从服务端得到
+      });
+      menu.init();
+      menu.off();
+      menu.submit()
+    })
+  </script>
+</body>
+</html>
