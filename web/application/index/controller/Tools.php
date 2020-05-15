@@ -15,7 +15,7 @@ class Tools extends Controller
         $menu = get_menu(2);
         
         $this->assign($menu);
-        return $this->fetch('index');
+        return $this->fetch('echats');
     }
     
     

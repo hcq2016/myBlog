@@ -58,6 +58,8 @@ class DocumentBuilder extends Controller
             
         } catch ( \PDOException $e ) {
             echo $e->getMessage();
+        } catch (\Exception $e){
+            echo $e->getMessage();
         }
     }
     
@@ -140,6 +142,8 @@ class DocumentBuilder extends Controller
             
             
         } catch ( \PDOException $e ) {
+            echo $e->getMessage();
+        } catch (\Exception $e){
             echo $e->getMessage();
         }
     }

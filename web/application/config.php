@@ -202,6 +202,8 @@ return [
     // | 会话设置
     // +----------------------------------------------------------------------
 
+    
+    
     'session'                => [
         'id'             => '',
         // SESSION_ID的提交变量,解决flash上传跨域
@@ -213,6 +215,8 @@ return [
         // 是否自动开启 SESSION
         'auto_start'     => true,
     ],
+    
+    
 
     // +----------------------------------------------------------------------
     // | Cookie设置
@@ -242,8 +246,8 @@ return [
     ],
     'db_mongo'=>[
         'type'  =>  '\think\mongo\Connection',
-        'hostname' => '172.17.0.3',
-        'database' => 'test',
+        'hostname' => '47.99.134.217',
+        'database' => 'myBlog',
         'hostport' => '27017',
         'username'        => 'admin',
         'password'        => 'admin',

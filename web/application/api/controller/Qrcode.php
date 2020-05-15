@@ -4,6 +4,7 @@ use think\Controller;//引入Controller类
 use think\Db;//引入数据库
 use  think\Request;
 use qrcodelib;
+use think\Exception;
 
 class Qrcode extends Controller
 {
@@ -25,7 +26,7 @@ class Qrcode extends Controller
             $return = UPLOAD_URL.$upload_path.$result;
             echo api_success($return);
             
-        } catch ( Exception $e ) {
+        } catch (\Exception $e){
             echo api_error($e->getCode(), $e->getMessage());
         }
     }

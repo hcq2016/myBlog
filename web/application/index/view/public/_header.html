@@ -34,13 +34,12 @@
       </for>
     </div>
     <ul class="layui-nav header-down-nav">
-      <li class="layui-nav-item"><a href="index.html">文章</a></li>
-      <li class="layui-nav-item"><a href="whisper.html"  class="active">工具</a></li>
-      <li class="layui-nav-item"><a href="leacots.html">留言</a></li>
-      <li class="layui-nav-item"><a href="about.html">关于</a></li>
+    <for start="0" end="count($menu)">
+      <li class="layui-nav-item"><a href="{{$menu[$i]['url']}}"  class="{{$menu[$i]['active']}}">{{$menu[$i]['name']}}</a></li>
+      </for>
     </ul>
     <p class="welcome-text">
-      欢迎来到<span class="name">hcq</span>的博客~
+      <span class="login-button"><a href="javascript:void(0);">登录</a></span><span>|</span>  欢迎来到<span class="name">hcq</span>的博客~
     </p>
   </div>
   <script>

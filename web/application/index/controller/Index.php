@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Controller;//引入Controller类
-use think\Db;//引入数据库
+
 
 class Index extends Controller
 {
@@ -9,12 +9,14 @@ class Index extends Controller
     
     public function index($name='world')
     {
-//         $info = Db::connect('db_mongo')->name('sites')->select();
-//         echo '<pre>';
-//         print_r($_SERVER);
-//         return ;
-        $menu = get_menu(1);
+
+        $Article_mdl = model('Article');
+        $detail = $Article_mdl->get_article_list();
+        $this->assign('list', $detail);
+//         echo json_encode($detail);
+//         exit;
         
+        $menu = get_menu(1);
         $this->assign($menu);
         return $this->fetch('article');
     }
@@ -24,6 +26,7 @@ class Index extends Controller
         
         $this->assign($menu);
         return $this->fetch('tools');
+        exit;
     }
     
     public function about(){

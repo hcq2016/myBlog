@@ -1,0 +1,121 @@
+<include file="public:_header">
+
+
+<input type="hidden" name="aid" value="{{$id}}">
+  <div class="content whisper-content leacots-content details-content">
+    <div class="cont w1000">
+      <div class="whisper-list">
+        <div class="item-box">
+          <div class="review-version">
+              <div class="form-box">
+                <div class="article-cont">
+                  <div class="title">
+                    <h3>{{$title}}</h3>
+                    <p class="cont-info"><span class="data">{{$create_date}}</span><span class="types">{{$tag}}</span></p>
+                  </div>
+                  <p class="cont-info"></p>
+					
+					
+					{{$content}}
+
+                </div>
+                <div class="form">
+                  <form class="layui-form" action="javascript:void(0)">
+                    <div class="layui-form-item layui-form-text">
+                      <div class="layui-input-block">
+                        <textarea name="desc" placeholder="既然来了，就说几句" class="layui-textarea"></textarea>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block" style="text-align: right;">
+                        <button class="layui-btn definite submit-form ">確定</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="volume">
+                全部留言 <span>10</span>
+              </div>
+              <div class="list-cont">
+                <for start="0" end="count($reply_list)">
+	                <div class="cont">
+	                  <div class="img">
+	                    <img src="img/header.png" alt="">
+	                  </div>
+	                  <div class="text">
+	                    <p class="tit"><span class="name">{{$reply_list[$i]['user_name']}}</span><span class="data">{{$reply_list[$i]['create_date']}}</span></p>
+	                    <p class="ct">{{$reply_list[$i]['desc']}}</p>
+	                  </div>
+	                </div>
+                </for>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div id="demo" style="text-align: center;"></div>
+    </div>
+  </div>
+  
+  
+  <script type="text/html" id="laytplCont">
+    <div class="cont">
+      <div class="img">
+        {{#  if(d.avatar){ }}
+        <img src="{{d.avatar}}" alt="">
+        {{#  } else { }}
+        <img src="img/header.png" alt="">
+        {{# } }}
+      </div>
+      <div class="text">
+        <p class="tit"><span class="name">游客</span><span class="data">{{new Date().toLocaleString()}}</span></p>
+        <p class="ct">{{d.cont}}</p>
+      </div>
+    </div>
+
+  </script>
+  
+    <include file="public:_footer">
+  
+  <script type="text/javascript" src="layui/layui.js"></script>
+  <script type="text/javascript">
+    layui.config({
+      base: 'js/util/'
+    }).use(['element','laypage','form','menu'],function(){
+      element = layui.element,laypage = layui.laypage,form = layui.form,menu = layui.menu;
+      laypage.render({
+        elem: 'demo'
+        ,count: 70 //数据总数，从服务端得到
+      });
+      menu.init();
+      menu.submit();
+    });
+    
+    
+    $('.submit-form').on('click', function(){
+    	var params = {};
+   		var desc = $('textarea[name=desc]').val();
+   		var aid = $('input[name=aid]').val();
+   		
+    	if(desc==''){
+    		layer.msg('请输入内容');
+    		return;
+    	}
+    	
+    	params['desc'] = desc;
+    	params['aid'] = aid;
+    	res = JSON.stringify(params);
+        var form_data = new FormData();
+        
+        form_data.append("params", res);
+    	Formsubmit.formsubmit(form_data,'/api/article/reply', 'submit_callback');
+    });
+    
+    function submit_callback(){
+    	
+    }
+    
+    
+  </script>
+</body>
+</html>
